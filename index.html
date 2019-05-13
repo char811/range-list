@@ -35,7 +35,8 @@
          * Adds a range to the list
          */
         add(range) {
-            if(!Array.isArray(range) || range.length != 2 || !Number.isInteger(range[0]) || !Number.isInteger(range[1]) || range[0] > range[1]) {
+            try {
+            if(!Array.isArray(range) || range.length !== 2 || !Number.isInteger(range[0]) || !Number.isInteger(range[1]) || range[0] > range[1]) {
                 alert('Wrong data!')
             } else {
                 if(this.data.length === 0) {
@@ -56,14 +57,18 @@
                     this.data = tempData;
                 }
             }
+            } catch(error) {
+                console.error(error);
+            }
         }
         /**
          * Removes a range from the list
          */
         remove(range) {
-            if(this.data.length == 0) {
+            try {
+            if(this.data.length === 0) {
                 alert('No data to remove!');
-            } else if(!Array.isArray(range) || range.length != 2 || !Number.isInteger(range[0]) || !Number.isInteger(range[1]) || range[0] > range[1]) {
+            } else if(!Array.isArray(range) || range.length !== 2 || !Number.isInteger(range[0]) || !Number.isInteger(range[1]) || range[0] > range[1]) {
                 alert('Wrong data!')
             } else {
                 let tempData = this.data;
@@ -83,6 +88,9 @@
                     }
                 });
                 this.data = tempData;
+            }
+            } catch(error) {
+                console.error(error);
             }
         }
 
@@ -107,6 +115,7 @@
             console.table(this.data);
             console.log(this.data);
 
+            try {
             let trBreak = document.createElement("tr");
             trBreak.appendChild(this.createNewTd('New List'));
             trBreak.appendChild(this.createNewTd(''));
@@ -118,7 +127,9 @@
                 tr.appendChild(this.createNewTd(elem[1]));
                 document.getElementById("list-body").appendChild(tr);
             });
-
+            } catch(error) {
+                console.error(error);
+            }
         }
 
         createNewTd(elem) {
